@@ -7,7 +7,7 @@ function HeroSection() {
       {/* Left Container */}
       <div className="w-full md:w-[60%] flex flex-col items-start mb-8 md:mb-0">
         {/* Heading */}
-        <h1 className="text-3xl md:text-5xl font-bold text-white mb-6 md:mb-14">
+        <h1 className="text-3xl md:text-5xl md:mt-1 font-bold text-white mb-6 md:mb-14 mt-8">
           Buy your favorite gadgets
           <br />
           for the best prices
