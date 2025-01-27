@@ -5,7 +5,7 @@ function BestSellingGadgets() {
     <div>
       <div className="bg-gradient-to-r from-blue-400 via-pink-400 to-pink-400 flex flex-col items-center">
         <h1 className="text-3xl text-white font-bold mt-10">Best Selling Gadgets</h1>
-        <div className="bg-gradient-to-r from-blue-800 via-white to-pink-600 w-[250px] h-[10px] flex justify-center items-center rounded-lg m-5"></div>
+        <div className="bg-gradient-to-r from-blue-800 via-white to-blue-800 w-[250px] h-[10px] flex justify-center items-center rounded-lg m-5"></div>
       </div>
       <div className="bg-gradient-to-r from-blue-400 via-pink-400 to-pink-400 w-full h-full flex flex-wrap px-4 py-5 justify-between">
         {/* Card 1 - iPhone */}
