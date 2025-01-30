@@ -11,6 +11,7 @@ import UserDashboard from "./components/private/user/UserDashboard";
 import Shopping from "./components/private/user/Shopping";
 import MyOrders from "./components/private/user/MyOrders";
 import AppLayout from "./components/public/AppLayout";
+import ShoppingLayout from "./components/private/user/ShoppingLayout";
 
 function App() {
   return (
@@ -25,14 +26,16 @@ function App() {
           <Route path="contact" element={<Contact />} />
           <Route path="login" element={<Login />} />
           <Route path="signup" element={<Signup />} />
-          <Route path="placeorder" element={<PlaceOrder />} />
         </Route>
 
         {/* User routes */}
         <Route path="/user" element={<UserLayout />}>
           <Route index element={<UserDashboard />} /> 
           <Route path="dashboard" element={<UserDashboard />} />
-          <Route path="shopping" element={<Shopping />} />
+          <Route path="shopping" element={<ShoppingLayout />}>
+            <Route index element={<Shopping />} /> {/* This is the main shopping page */}
+            <Route path="placeorder" element={<PlaceOrder />} /> {/* This is the place order page */}
+          </Route>
           <Route path="myorders" element={<MyOrders />} />
         </Route>
       </Routes>

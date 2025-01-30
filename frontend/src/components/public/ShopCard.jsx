@@ -15,7 +15,7 @@ function ShopCard() {
         <p><strong>Price:</strong> RS 180000</p>
         <p><strong>Description:</strong> Best Selling Laptop</p>
       </div>
-      <Link to="/placeorder">
+      <Link to="/user/shopping/placeorder">
         <button className="bg-pink-500 text-white w-full hover:bg-slate-900 py-2 rounded-lg hover:cursor-pointer transition-all duration-300 ease-in-out transform hover:scale-105">
           Buy Now
         </button>
