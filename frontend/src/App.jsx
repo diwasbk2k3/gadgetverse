@@ -6,6 +6,7 @@ import About from "./components/public/About";
 import Contact from "./components/public/Contact";
 import Login from "./components/public/Login";
 import Signup from "./components/public/Signup";
+import PlaceOrder from "./components/private/PlaceOrder";
 
 function App() {
 
@@ -21,6 +22,7 @@ function App() {
           <Route path="/contact" element={<Contact/>}/>
           <Route path="/login" element={<Login/>}/>
           <Route path="/signup" element={<Signup/>}/>
+          <Route path="/placeorder" element={<PlaceOrder/>} />
         </Routes>
       </BrowserRouter>
     </>

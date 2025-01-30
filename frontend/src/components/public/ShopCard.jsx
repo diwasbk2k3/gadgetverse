@@ -6,7 +6,7 @@ function ShopCard() {
     <div className="bg-white text-black rounded-lg p-4 w-full sm:w-[300px] h-auto sm:h-[420px] ml-0 sm:ml-3 mb-3 flex flex-col justify-between shadow-lg">
       <img
         src="https://via.placeholder.com/300x200"
-        alt="Product"
+        alt="Product Image"
         className="w-full h-[200px] object-cover rounded"
       />
       <div>
