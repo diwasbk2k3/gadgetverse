@@ -80,6 +80,12 @@ function Login() {
               Signup here
             </Link>
           </p>
+          <p className="text-center text-gray-600 mt-4">
+            Login as Admin?{" "}
+            <Link to="/admin" className="text-blue-900 font-semibold hover:underline">
+              Click here
+            </Link>
+          </p>
         </div>
       </div>
     </>

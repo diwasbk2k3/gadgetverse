@@ -12,6 +12,7 @@ import Shopping from "./components/private/user/Shopping";
 import MyOrders from "./components/private/user/MyOrders";
 import AppLayout from "./components/public/AppLayout";
 import ShoppingLayout from "./components/private/user/ShoppingLayout";
+import AdminLogin from "./components/public/AdminLogin";
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
           <Route path="contact" element={<Contact />} />
           <Route path="login" element={<Login />} />
           <Route path="signup" element={<Signup />} />
+          <Route path="admin" element={<AdminLogin/>} />
         </Route>
 
         {/* User routes */}
