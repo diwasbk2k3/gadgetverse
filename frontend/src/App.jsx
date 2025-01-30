@@ -1,32 +1,43 @@
-import { BrowserRouter, Routes, Route, } from "react-router-dom";
-import Navbar from "./components/public/Navbar"
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./components/public/Home";
 import Shop from "./components/public/Shop";
 import About from "./components/public/About";
 import Contact from "./components/public/Contact";
 import Login from "./components/public/Login";
 import Signup from "./components/public/Signup";
-import PlaceOrder from "./components/private/PlaceOrder";
+import PlaceOrder from "./components/private/user/PlaceOrder";
+import UserLayout from "./components/private/user/UserLayout";
+import UserDashboard from "./components/private/user/UserDashboard";
+import Shopping from "./components/private/user/Shopping";
+import MyOrders from "./components/private/user/MyOrders";
+import AppLayout from "./components/public/AppLayout";
 
 function App() {
-
   return (
-    <>
-      <BrowserRouter>
-        <Navbar/>
-        <Routes>
-        <Route path="/" element={<Home/>}/>
-          <Route path="/home" element={<Home/>}/>
-          <Route path="/shop" element={<Shop/>}/>
-          <Route path="/about" element={<About/>}/>
-          <Route path="/contact" element={<Contact/>}/>
-          <Route path="/login" element={<Login/>}/>
-          <Route path="/signup" element={<Signup/>}/>
-          <Route path="/placeorder" element={<PlaceOrder/>} />
-        </Routes>
-      </BrowserRouter>
-    </>
-  )
+    <BrowserRouter>
+      <Routes>
+        {/* Public routes */}
+        <Route path="/" element={<AppLayout />}>
+          <Route index element={<Home />} />
+          <Route path="home" element={<Home />} />
+          <Route path="about" element={<About />} />
+          <Route path="shop" element={<Shop />} />
+          <Route path="contact" element={<Contact />} />
+          <Route path="login" element={<Login />} />
+          <Route path="signup" element={<Signup />} />
+          <Route path="placeorder" element={<PlaceOrder />} />
+        </Route>
+
+        {/* User routes */}
+        <Route path="/user" element={<UserLayout />}>
+          <Route index element={<UserDashboard />} /> 
+          <Route path="dashboard" element={<UserDashboard />} />
+          <Route path="shopping" element={<Shopping />} />
+          <Route path="myorders" element={<MyOrders />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
+  );
 }
 
-export default App
+export default App;
