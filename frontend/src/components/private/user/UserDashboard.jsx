@@ -39,11 +39,11 @@ function UserDashboard() {
       </div>
 
       {showPasswordForm && (
-        <div className="mt-8 p-4 border-5 rounded-lg shadow-md">
+        <div className="mt-8 p-4 rounded-lg shadow-md">
           <h2 className="text-lg font-semibold">Change Password</h2>
-          <input type="password" placeholder="Current Password" className="w-full p-2 border rounded mt-5" />
-          <input type="password" placeholder="New Password" className="w-full p-2 border rounded mt-3" />
-          <input type="password" placeholder="Confirm New Password" className="w-full p-2 border rounded mt-3" />
+          <input type="password" placeholder="Current Password" className="w-full p-2 rounded mt-5" />
+          <input type="password" placeholder="New Password" className="w-full p-2 rounded mt-3" />
+          <input type="password" placeholder="Confirm New Password" className="w-full p-2 rounded mt-3" />
           <button className="bg-green-500 text-white px-8 py-2 mt-4 rounded hover:cursor-pointer">Submit</button>
         </div>
       )}

@@ -5,7 +5,7 @@ function Navbar() {
   return (
     <>
       <nav className="w-full h-20 text-white bg-[#142441] flex items-center justify-between px-4">
-        <div className="text-2xl sm:text-3xl font-bold"><Link to="/home" className="hover:text-pink-500">Gadgetverse</Link></div>
+        <div className="text-2xl sm:text-3xl font-bold"><Link to="/" className="hover:text-pink-500">Gadgetverse</Link></div>
         <ul className="hidden md:flex text-lg sm:text-2lg">
           <li className="mx-[10px] sm:mx-[20px] cursor-pointer h-10 w-[80px] sm:w-[120px] flex items-center justify-center">
           <Link to="/home" className="hover:text-red-400">HOME</Link>
