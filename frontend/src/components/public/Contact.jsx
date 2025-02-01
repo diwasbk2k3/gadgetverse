@@ -27,15 +27,27 @@ function Contact() {
               class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </div>
-          <div class="mb-6">
-            <label htmlFor="email" class="block text-gray-700 font-semibold mb-2">
+          <div className="mb-6">
+            <label htmlFor="email" className="block text-gray-700 font-semibold mb-2">
               Your Email
             </label>
             <input
               type="email"
               id="email"
+              onChange={(e) => setFormData({ ...formData, email: e.target.value })}
               placeholder="Enter your email"
-              class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+          </div>
+          <div className="mb-6">
+            <label htmlFor="phone" className="block text-gray-700 font-semibold mb-2">
+              Your Phone
+            </label>
+            <input
+              type="tel"
+              id="phone"
+              placeholder="Enter your phone number"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </div>
           <div class="mb-6">
