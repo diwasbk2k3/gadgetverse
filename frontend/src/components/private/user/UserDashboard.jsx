@@ -13,9 +13,10 @@ function UserDashboard() {
 
   return (
     <div className="p-6 bg-white shadow-lg rounded-lg">
+      {/* Greeting */}
       <h1 className="text-2xl font-semibold text-gray-800">{greeting}, User!</h1>
       <p className="mt-2 text-gray-600">Manage your profile and track your purchase summary.</p>
-
+      {/* Dashboard Section*/}
       <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-6">
         <div
           className="p-4 bg-green-500 text-white rounded-lg shadow-md transition-transform duration-300 hover:scale-105 cursor-pointer"
