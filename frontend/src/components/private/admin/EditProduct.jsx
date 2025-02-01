@@ -1,9 +1,9 @@
 import React from "react";
 
-function EditProduct() {
+function EditProduct({setEditProduct}) {
   return (
     <form className="space-y-4 p-4 bg-gray-100 rounded-lg">
-      <h3 className="text-2xl text-gray-900 font-bold mb-6 text-center">Edit Product</h3>
+      <h3 className="text-lg text-gray-900 font-bold mb-6">Edit Product</h3>
 
       {/* Product Name */}
       <div>
@@ -89,6 +89,7 @@ function EditProduct() {
         <button
           type="button"
           className="bg-red-500 text-white px-10 py-2 rounded hover:bg-red-600 hover:cursor-pointer"
+          onClick={() => setEditProduct(null)}
         >
           Cancel
         </button>
