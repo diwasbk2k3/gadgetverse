@@ -8,9 +8,7 @@ function UploadProduct() {
         {/* Product Name */}
         <div>
           <label
-            htmlFor="productName"
-            className="block text-gray-700 font-medium mb-2"
-          >
+            htmlFor="productName" className="block text-gray-700 font-medium mb-2">
             Product Name
           </label>
           <input
@@ -23,10 +21,7 @@ function UploadProduct() {
 
         {/* Product Price */}
         <div>
-          <label
-            htmlFor="productPrice"
-            className="block text-gray-700 font-medium mb-2"
-          >
+          <label htmlFor="productPrice" className="block text-gray-700 font-medium mb-2">
             Product Price
           </label>
           <input
@@ -39,10 +34,7 @@ function UploadProduct() {
 
         {/* Product Image URL */}
         <div>
-          <label
-            htmlFor="productImage"
-            className="block text-gray-700 font-medium mb-2"
-          >
+          <label htmlFor="productImage" className="block text-gray-700 font-medium mb-2">
             Product Image URL
           </label>
           <input
@@ -55,10 +47,7 @@ function UploadProduct() {
 
         {/* Product Category */}
         <div>
-          <label
-            htmlFor="productCategory"
-            className="block text-gray-700 font-medium mb-2"
-          >
+          <label htmlFor="productCategory" className="block text-gray-700 font-medium mb-2">
             Product Category
           </label>
           <select
@@ -76,10 +65,7 @@ function UploadProduct() {
 
         {/* Product Description */}
         <div>
-          <label
-            htmlFor="productDescription"
-            className="block text-gray-700 font-medium mb-2"
-          >
+          <label htmlFor="productDescription" className="block text-gray-700 font-medium mb-2">
             Product Description
           </label>
           <textarea
@@ -91,10 +77,7 @@ function UploadProduct() {
         </div>
 
         {/* Submit Button */}
-        <button
-          type="submit"
-          className="w-full bg-blue-500 text-white font-medium py-2 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 hover:cursor-pointer"
-        >
+        <button type="submit" className="w-full bg-blue-500 text-white font-medium py-2 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 hover:cursor-pointer">
           Upload Product
         </button>
       </form>
