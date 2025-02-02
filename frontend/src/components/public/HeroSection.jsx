@@ -1,4 +1,5 @@
 import React from "react";
+import { motion } from "framer-motion";
 
 function HeroSection() {
   return (
@@ -36,11 +37,13 @@ function HeroSection() {
       </div>
 
       {/* Right Container */}
-      <div className="bg-green-300 w-full md:w-[40%] flex items-center justify-center">
-        <img
-          src=""
+      <div className="w-full md:w-[40%] flex items-center justify-center m-5">
+        <motion.img
+          src="gadgetverse_img.png"
           alt="Gadget Collection"
-          className="max-w-full max-h-[300px] md:max-h-[400px] shadow-lg rounded-lg"
+          className="max-w-full h-[350px] md:max-h-[400px]"
+          animate={{ y: [0, -10, 0] }}
+          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
         />
       </div>
     </div>
