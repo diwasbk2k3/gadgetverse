@@ -1,5 +1,6 @@
 import React from 'react';
 import Footer from './Footer';
+import { motion } from "framer-motion";
 
 function About() {
   return (
@@ -17,10 +18,12 @@ function About() {
       </div>
       <div className="bg-white text-white flex flex-col items-center">
         <div className="flex justify-center mt-8">
-          <img
+          <motion.img
             className="h-[125px] sm:h-[150px]"
             src="satisfaction.png"
             alt="Satisfaction Guaranteed"
+            animate={{ y: [0, -10, 0] }}
+            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
           />
         </div>
         <h1 className="text-gray-900 text-3xl font-bold mt-2 sm:text-4xl">Our Services</h1>

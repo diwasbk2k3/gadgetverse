@@ -3,11 +3,11 @@ import React from 'react';
 function BestSellingGadgets() {
   return (
     <div>
-      <div className="bg-gradient-to-r from-blue-400 via-pink-400 to-pink-400 flex flex-col items-center">
+      <div className="bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 flex flex-col items-center">
         <h1 className="text-3xl text-white font-bold mt-10">Best Selling Gadgets</h1>
-        <div className="bg-gradient-to-r from-blue-800 via-white to-blue-800 w-[250px] h-[10px] flex justify-center items-center rounded-lg m-5"></div>
+        <div className="bg-gradient-to-r via-white w-[250px] h-[10px] flex justify-center items-center rounded-lg m-5"></div>
       </div>
-      <div className="bg-gradient-to-r from-blue-400 via-pink-400 to-pink-400 w-full h-full flex flex-wrap px-4 py-5 justify-between">
+      <div className="bg-gradient-to-r from-blue-400 via-purple-500 to-pink-400 w-full h-full flex flex-wrap px-4 py-5 justify-between">
         {/* Card 1 - iPhone */}
         <div className="bg-white text-black rounded-lg p-4 w-full md:w-[200px] h-[275px] md:h-[275px] sm:w-[300px] m-3">
           <img

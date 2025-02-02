@@ -7,13 +7,13 @@ function Shop() {
     <>
     <div className= 'bg-gradient-to-r from-blue-400 via-red-300 to-blue-400 min-h-screen'>
     {/* Search Bar */}
-    <div className="w-full flex flex-col sm:flex-row justify-center px-4 py-5 gap-2">
+    <div className="flex w-full mb-4">
       <input
-      type="text"
-      placeholder="Search gadgets here"
-      className="flex-grow px-4 py-2 rounded-lg sm:rounded-l-lg bg-white text-black outline-none w-full sm:w-auto"
+        type="text"
+        placeholder="Search gadgets here"
+        className="ml-4 mt-5 flex-grow px-4 py-3 rounded-l-lg text-black outline-none bg-white"
       />
-      <button className="p-2 bg-slate-900 text-white rounded-lg sm:rounded-r-lg hover:bg-gray-800 w-full sm:w-auto hover:cursor-pointer transition-all duration-300 ease-in-out transform hover:scale-105">
+      <button className="mt-5 mr-4 px-6 md:px-8 bg-black text-white rounded-r-lg hover:bg-gray-800 hover:cursor-pointer w-full sm:w-auto">
         Search
       </button>
     </div>

@@ -21,7 +21,7 @@ function HeroSection() {
             placeholder="Search gadgets here"
             className="flex-grow px-4 py-2 rounded-l-lg text-black outline-none bg-white"
           />
-          <button className="px-4 md:px-6 bg-black text-white rounded-r-lg hover:bg-gray-800">
+          <button className="px-4 md:px-6 bg-black text-white rounded-r-lg hover:bg-gray-800 hover:cursor-pointer">
             Search
           </button>
         </div>
