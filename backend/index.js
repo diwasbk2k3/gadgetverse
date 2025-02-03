@@ -1,6 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const userRoute = require('./routes/userRoute');
+const adminRoute = require('./routes/adminRoute');
 
 const app = express();
 
@@ -10,6 +11,7 @@ app.use(express.json());
 
 //Routes
 app.use('/users', userRoute);
+app.use('/admins', adminRoute);
 
 // Start server
 const PORT = process.env.PORT || 5000;
