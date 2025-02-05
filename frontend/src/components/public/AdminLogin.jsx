@@ -1,7 +1,40 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Link, useNavigate  } from 'react-router-dom';
+import axios from 'axios';
 
 function AdminLogin() {
+
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const navigate = useNavigate();
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      // Make the GET request to fetch the admin by email
+      const response = await axios.get(`http://localhost:5000/admins/${email}`);
+      const admin = response.data; // Ensure this contains the expected structure
+
+      // Log the response for debugging
+      console.log('Admin from API:', admin);
+
+      // Check if the password matches
+      if (admin.password === password) {
+        // Save the admin login status (localStorage)
+        localStorage.setItem('adminLoggedIn', 'true');
+        localStorage.setItem('adminEmail', email);
+        navigate('/admin/dashboard'); // Redirect to the admin dashboard
+      } else {
+        setError('Incorrect password');
+      }
+    } catch (err) {
+      console.error('Login Error:', err);
+      setError('Admin not found');
+    }
+  };
+
 
   return (
     <>
@@ -22,7 +55,7 @@ function AdminLogin() {
 
         {/* Right Container (Login Form Section) */}
         <div className="w-[40%] bg-gradient-to-r from-blue-400 via-teal-500 to-pink-400">
-          <form className="m-5">
+          <form className="m-5"  onSubmit={handleSubmit}>
             <h2 className="text-3xl font-bold text-gray-800 text-center mt-12">
               Welcome Back!
             </h2>
@@ -34,6 +67,8 @@ function AdminLogin() {
               <input
                 type="email"
                 id="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 placeholder="Enter your email"
                 className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-white"
               />
@@ -45,6 +80,8 @@ function AdminLogin() {
               <input
                 type="password"
                 id="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
                 placeholder="Enter your password"
                 className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-white"
               />
