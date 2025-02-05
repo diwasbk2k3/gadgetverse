@@ -1,7 +1,33 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
 
 function Login() {
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const navigate = useNavigate();
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const response = await axios.post("http://localhost:5000/users/login", {email,password,});
+
+      // On successful login, store the user data in localStorage
+      localStorage.setItem("customer_id", response.data.customer_id);
+      localStorage.setItem("email", response.data.email);
+
+      // Alert the user and redirect to the shop page
+      alert('Login successful!');
+      navigate("/user/dashboard");
+
+    } catch (err) {
+      // Show alert with the error message if login fails
+      alert(err.response?.data?.error || "Login failed, please try again.");
+    }
+  };
+
   return (
     <>
       {/* Header Section */}
@@ -29,7 +55,7 @@ function Login() {
 
         {/* Right Container (Login Form Section) */}
         <div className="lg:w-[40%] w-full bg-gradient-to-r from-blue-400 via-teal-500 to-pink-400 px-6 py-8">
-          <form className="m-auto max-w-sm">
+          <form className="m-auto max-w-sm" onSubmit={handleSubmit}>
             <h2 className="text-3xl font-bold text-gray-800 text-center mt-4">
               Welcome Back!
             </h2>
@@ -46,6 +72,8 @@ function Login() {
               <input
                 type="email"
                 id="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 placeholder="Enter your email"
                 className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-white"
               />
@@ -60,6 +88,8 @@ function Login() {
               <input
                 type="password"
                 id="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
                 placeholder="Enter your password"
                 className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-white"
               />
