@@ -13,19 +13,13 @@ function AdminLogin() {
     e.preventDefault();
 
     try {
-      // Make the GET request to fetch the admin by email
       const response = await axios.get(`http://localhost:5000/admins/${email}`);
-      const admin = response.data; // Ensure this contains the expected structure
+      const admin = response.data;
 
-      // Log the response for debugging
-      console.log('Admin from API:', admin);
-
-      // Check if the password matches
       if (admin.password === password) {
-        // Save the admin login status (localStorage)
         localStorage.setItem('adminLoggedIn', 'true');
         localStorage.setItem('adminEmail', email);
-        navigate('/admin/dashboard'); // Redirect to the admin dashboard
+        navigate('/admin/dashboard');
       } else {
         setError('Incorrect password');
       }
@@ -60,6 +54,7 @@ function AdminLogin() {
               Welcome Back!
             </h2>
             <p className="text-gray-600 text-center mb-12">Manage your platform with ease</p>
+            {error && <p className="text-red-600 text-center mb-4">{error}</p>}
             <div className="mb-6">
               <label htmlFor="email" className="block text-gray-700 font-semibold mb-2">
                 Email Address

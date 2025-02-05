@@ -1,7 +1,17 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate  } from "react-router-dom";
 
 function UserNavbar() {
+
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+  // Remove user data from localStorage
+  localStorage.removeItem('customer_id');
+  localStorage.removeItem('email');
+    navigate('/login');
+  };
+
   return (
     <nav className="bg-gray-800 text-white p-5 flex flex-wrap justify-between items-center shadow-lg">
       <div className="flex flex-wrap space-x-4 md:space-x-6">
@@ -19,7 +29,7 @@ function UserNavbar() {
       </div>
 
       {/* Logout Button */}
-      <button className="hover:text-red-400 flex items-center hover:cursor-pointer mt-2 md:mt-0">
+      <button onClick={handleLogout} className="hover:text-red-400 flex items-center hover:cursor-pointer mt-2 md:mt-0">
         <i className="fa-solid fa-sign-out pr-2"></i> Logout
       </button>
     </nav>

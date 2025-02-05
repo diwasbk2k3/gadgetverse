@@ -1,7 +1,16 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate  } from 'react-router-dom';
 
 function AdminNavbar() {
+
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    // Remove admin data from localStorage
+    localStorage.removeItem('adminLoggedIn');
+    localStorage.removeItem('adminEmail');
+      navigate('/admin/login');
+  };
 
   return (
     <div>
@@ -36,7 +45,7 @@ function AdminNavbar() {
         </Link>
 
         {/* Modify the Logout link */}
-        <button className="hover:text-red-400 hover:cursor-pointer">
+        <button onClick={handleLogout} className="hover:text-red-400 hover:cursor-pointer">
           <i className="fa-solid fa-sign-out pr-2"></i>
           Logout
         </button>
