@@ -1,8 +1,42 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Location from './Location';
 import Footer from './Footer';
+import axios from "axios";
 
 function Contact() {
+
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    contact: "",
+    message: "",
+  });
+
+  const [status, setStatus] = useState("");
+
+  // Handle form submission
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    // Check if all fields are filled
+    if (!formData.name || !formData.email || !formData.contact || !formData.message) {
+      setStatus("Please fill in all fields.");
+      return;
+    }
+
+    try {
+      const response = await axios.post("http://localhost:5000/messages", formData);
+      if (response.status === 201) {
+        setStatus("Message sent successfully!");
+        setFormData({ name: "", email: "", contact: "", message: "" });
+      } else {
+        setStatus("Failed to send message.");
+      }
+    } catch (err) {
+      setStatus("Error sending message.");
+    }
+  };
+
   return (
     <>
       <div className="h-[125px] flex w-full bg-white">
@@ -15,7 +49,7 @@ function Contact() {
       </div>
       {/* Contact Form */}
       <div>
-        <form class="m-5">
+        <form class="m-5" onSubmit={handleSubmit}>
           <div class="mb-6">
             <label htmlFor="name" class="block text-gray-700 font-semibold mb-2">
               Your Name
@@ -23,6 +57,8 @@ function Contact() {
             <input
               type="text"
               id="name"
+              value={formData.name}
+              onChange={(e) => setFormData({ ...formData, name: e.target.value })}
               placeholder="Enter your name"
               class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
@@ -34,6 +70,7 @@ function Contact() {
             <input
               type="email"
               id="email"
+              value={formData.email}
               onChange={(e) => setFormData({ ...formData, email: e.target.value })}
               placeholder="Enter your email"
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -46,6 +83,8 @@ function Contact() {
             <input
               type="tel"
               id="phone"
+              value={formData.contact}
+              onChange={(e) => setFormData({ ...formData, contact: e.target.value })}
               placeholder="Enter your phone number"
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
@@ -56,6 +95,8 @@ function Contact() {
             </label>
             <textarea
               id="message"
+              value={formData.message}
+              onChange={(e) => setFormData({ ...formData, message: e.target.value })}
               placeholder="Enter your message"
               rows="4"
               class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -68,6 +109,12 @@ function Contact() {
             Send Message
           </button>
         </form>
+        {/* Status Message */}
+        {status && (
+          <div className={`text-center mt-4 ${status === "Message sent successfully!" ? "text-green-500" : "text-red-500"}`}>
+            {status}
+          </div>
+        )}
       </div>
       <Location/>
       <Footer/>
