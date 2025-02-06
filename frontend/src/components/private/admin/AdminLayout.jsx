@@ -1,8 +1,15 @@
 import React from 'react'
-import { Outlet } from 'react-router-dom'
+import { Outlet, Navigate } from 'react-router-dom'
 import AdminNavbar from './AdminNavbar'
 
 function AdminLayout() {
+
+  const isAdminLoggedIn = localStorage.getItem('adminLoggedIn') === 'true';
+
+  if (!isAdminLoggedIn) {
+    return <Navigate to="/admin"/>; // Redirect to login if not logged in
+  }
+  
   return (
     <div>
         <AdminNavbar/>

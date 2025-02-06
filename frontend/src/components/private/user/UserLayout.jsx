@@ -1,10 +1,16 @@
 
 import React from "react";
-import { Outlet } from "react-router-dom";
+import { Outlet, Navigate  } from "react-router-dom";
 import UserNavbar from "./UserNavbar";
 
 function UserLayout() {
 
+  const isUserLoggedIn = localStorage.getItem("customer_id") !== null;
+
+  if (!isUserLoggedIn) {
+    return <Navigate to="/login" replace />; // Redirect to login if not logged in
+  }
+  
   return (
     <>
       <UserNavbar/>
