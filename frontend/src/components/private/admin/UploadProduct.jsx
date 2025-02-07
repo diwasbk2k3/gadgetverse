@@ -1,14 +1,43 @@
-import React from 'react'
+
+import React from "react";
+import axios from "axios";
 
 function UploadProduct() {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+  
+    const formData = new FormData();
+    formData.append("name", e.target.productName.value);
+    formData.append("price", e.target.productPrice.value);
+    formData.append("category", e.target.productCategory.value);
+    formData.append("description", e.target.productDescription.value);
+    formData.append("productImage", e.target.productImage.files[0]); // Image as file
+  
+    try {
+      const response = await axios.post("http://localhost:5000/products", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+      console.log("Product uploaded:", response.data);
+      alert("Product uploaded successfully!");
+    } catch (err) {
+      console.error("Error uploading product:", err);
+      alert("Failed to upload product.");
+    }
+  };
+  
+
   return (
     <div className="p-6">
       <h2 className="text-2xl font-bold mb-6 text-center">Upload A Product</h2>
-      <form className="space-y-4">
+      <form className="space-y-4" onSubmit={handleSubmit}>
         {/* Product Name */}
         <div>
           <label
-            htmlFor="productName" className="block text-gray-700 font-medium mb-2">
+            htmlFor="productName"
+            className="block text-gray-700 font-medium mb-2"
+          >
             Product Name
           </label>
           <input
@@ -21,7 +50,10 @@ function UploadProduct() {
 
         {/* Product Price */}
         <div>
-          <label htmlFor="productPrice" className="block text-gray-700 font-medium mb-2">
+          <label
+            htmlFor="productPrice"
+            className="block text-gray-700 font-medium mb-2"
+          >
             Product Price
           </label>
           <input
@@ -32,22 +64,28 @@ function UploadProduct() {
           />
         </div>
 
-        {/* Product Image URL */}
+        {/* Product Image */}
         <div>
-          <label htmlFor="productImage" className="block text-gray-700 font-medium mb-2">
-            Product Image URL
+          <label
+            htmlFor="productImage"
+            className="block text-gray-700 font-medium mb-2"
+          >
+            Product Image
           </label>
           <input
-            type="text"
+            type="file"
             id="productImage"
-            placeholder="Enter image URL"
             className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            required
           />
         </div>
 
         {/* Product Category */}
         <div>
-          <label htmlFor="productCategory" className="block text-gray-700 font-medium mb-2">
+          <label
+            htmlFor="productCategory"
+            className="block text-gray-700 font-medium mb-2"
+          >
             Product Category
           </label>
           <select
@@ -65,7 +103,10 @@ function UploadProduct() {
 
         {/* Product Description */}
         <div>
-          <label htmlFor="productDescription" className="block text-gray-700 font-medium mb-2">
+          <label
+            htmlFor="productDescription"
+            className="block text-gray-700 font-medium mb-2"
+          >
             Product Description
           </label>
           <textarea
@@ -77,12 +118,15 @@ function UploadProduct() {
         </div>
 
         {/* Submit Button */}
-        <button type="submit" className="w-full bg-blue-500 text-white font-medium py-2 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 hover:cursor-pointer">
+        <button
+          type="submit"
+          className="w-full bg-blue-500 text-white font-medium py-2 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+        >
           Upload Product
         </button>
       </form>
     </div>
-  )
+  );
 }
 
-export default UploadProduct
+export default UploadProduct;

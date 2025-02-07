@@ -5,7 +5,7 @@ import Footer from './Footer'
 function Shop() {
   return (
     <>
-    <div className= 'bg-gradient-to-r from-blue-400 via-red-300 to-blue-400 min-h-screen'>
+    <div className= 'bg-gradient-to-r from-blue-400 via-red-300 to-blue-400'>
     {/* Search Bar */}
     <div className="flex w-full mb-4">
       <input
@@ -19,6 +19,11 @@ function Shop() {
     </div>
 
     <div className="flex flex-wrap md:gap-0 md:px-0 px-4 gap-2">
+      <ShopCard/>
+      <ShopCard/>
+      <ShopCard/>
+      <ShopCard/>
+      <ShopCard/>
       <ShopCard/>
       <ShopCard/>
       <ShopCard/>

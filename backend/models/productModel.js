@@ -14,7 +14,7 @@ const Product = sequelize.define('Product', {
     type: DataTypes.FLOAT,
     allowNull: false,
   },
-  image_url: {
+  image_path: {
     type: DataTypes.STRING,
     allowNull: true,
   },
