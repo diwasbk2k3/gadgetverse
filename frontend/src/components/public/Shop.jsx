@@ -29,6 +29,16 @@ function Shop() {
       <ShopCard/>
       <ShopCard/>
       <ShopCard/>
+      <ShopCard/>
+      <ShopCard/>
+      <ShopCard/>
+      <ShopCard/>
+      <ShopCard/>
+      <ShopCard/>
+      <ShopCard/>
+      <ShopCard/>
+      <ShopCard/>
+      <ShopCard/>
     </div>
     
     <div className="bg-gradient-to-r from-blue-400 via-red-300 to-blue-400 mt-8">
