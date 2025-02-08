@@ -7,7 +7,7 @@ function AdminLayout() {
   const isAdminLoggedIn = localStorage.getItem('adminLoggedIn') === 'true';
 
   if (!isAdminLoggedIn) {
-    return <Navigate to="/admin"/>; // Redirect to login if not logged in
+    return <Navigate to="/admin/login"/>; // Redirect to login if not logged in
   }
   
   return (
