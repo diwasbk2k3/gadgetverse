@@ -5,7 +5,7 @@ import Footer from './Footer'
 function Shop() {
   return (
     <>
-    <div className= 'bg-gradient-to-r from-blue-400 via-red-300 to-blue-400'>
+    <div className= 'bg-gradient-to-r from-pink-400 via-teal-500 to-blue-400'>
     {/* Search Bar */}
     <div className="flex w-full mb-4">
       <input

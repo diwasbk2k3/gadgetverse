@@ -1,6 +1,30 @@
-import React from 'react'
+import React, { useEffect, useState }  from 'react'
+import axios from "axios";
 
 function MyOrders() {
+
+  const [orders, setOrders] = useState([]);
+
+  useEffect(() => {
+    const fetchOrders = async () => {
+      const customer_id = localStorage.getItem("customer_id");
+
+      if (!customer_id) {
+        console.error("No customer ID found in localStorage");
+        return;
+      }
+
+      try {
+        const response = await axios.get(`http://localhost:5000/orders/customer-orders?customer_id=${customer_id}`);
+        setOrders(response.data);
+      } catch (err) {
+        console.error("Failed to fetch orders:", err);
+      }
+    };
+
+    fetchOrders();
+  }, []);
+
   return (
     <div className="p-6 overflow-x-auto">
       <h2 className="text-2xl font-bold mb-6 text-center">My Orders</h2>
@@ -22,11 +46,28 @@ function MyOrders() {
             </tr>
           </thead>
           <tbody>
+          {orders.length > 0 ? (
+            orders.map((order, index) => (
+              <tr key={order.order_id} className="text-center">
+                <td className="border border-gray-300 px-4 py-2">{index + 1}</td>
+                <td className="border border-gray-300 px-4 py-2">{order.order_id}</td>
+                <td className="border border-gray-300 px-4 py-2">{order.product_id}</td>
+                <td className="border border-gray-300 px-4 py-2">{order.product_name}</td>
+                <td className="border border-gray-300 px-4 py-2">{order.quantity}</td>
+                <td className="border border-gray-300 px-4 py-2">RS {order.price}</td>
+                <td className="border border-gray-300 px-4 py-2">RS {order.total_price}</td>
+                <td className="border border-gray-300 px-4 py-2">{order.phone}</td>
+                <td className="border border-gray-300 px-4 py-2">{order.email}</td>
+                <td className="border border-gray-300 px-4 py-2">{order.location}</td>
+              </tr>
+            ))
+          ) : (
             <tr>
               <td colSpan="10" className="text-center py-4">
                 No orders found for this customer
               </td>
             </tr>
+             )}
           </tbody>
         </table>
       </div>
