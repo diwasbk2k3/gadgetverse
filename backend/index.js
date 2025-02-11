@@ -6,6 +6,7 @@ const adminRoute = require('./routes/adminRoute');
 const messageRoute = require('./routes/messageRoute');
 const productRoute = require('./routes/productRoute');
 const orderRoute = require('./routes/orderRoute');
+const statsRoute = require('./routes/statsRoute');
 
 const app = express();
 
@@ -19,6 +20,7 @@ app.use('/admins', adminRoute);
 app.use('/messages', messageRoute); 
 app.use('/products', productRoute);
 app.use('/orders', orderRoute);
+app.use('/stats', statsRoute); 
 
 // Serve uploaded images
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
