@@ -1,6 +1,23 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import axios from "axios";
 
 export default function Messages() {
+  const [messages, setMessages] = useState([]);
+
+  useEffect(() => {
+    // Fetch messages from backend
+    const fetchMessages = async () => {
+      try {
+        const response = await axios.get("http://localhost:5000/messages");
+        setMessages(response.data);
+      } catch (err) {
+        console.error("Error fetching messages:", err);
+      }
+    };
+
+    fetchMessages();
+  }, []);
+
   return (
     <div className="p-6">
       <h2 className="text-2xl font-bold mb-6 text-center">Messages</h2>
@@ -16,11 +33,23 @@ export default function Messages() {
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td colSpan="5" className="text-center py-4">
-                No messages available
-              </td>
-            </tr>
+            {messages.length === 0 ? (
+              <tr>
+                <td colSpan="5" className="text-center py-4">
+                  No messages available
+                </td>
+              </tr>
+            ) : (
+              messages.map((msg, index) => (
+                <tr key={msg.id}>
+                  <td className="border border-gray-300 px-4 py-2">{index + 1}</td>
+                  <td className="border border-gray-300 px-4 py-2">{msg.name}</td>
+                  <td className="border border-gray-300 px-4 py-2">{msg.email}</td>
+                  <td className="border border-gray-300 px-4 py-2">{msg.contact}</td>
+                  <td className="border border-gray-300 px-4 py-2">{msg.message}</td>
+                </tr>
+              ))
+            )}
           </tbody>
         </table>
       </div>
