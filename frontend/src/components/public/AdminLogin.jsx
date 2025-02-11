@@ -82,6 +82,7 @@ function AdminLogin() {
           </p>
         </div>
       </div>
+      <Footer/>
     </>
   );
 }

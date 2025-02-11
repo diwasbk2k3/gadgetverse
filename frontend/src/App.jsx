@@ -46,8 +46,8 @@ function App() {
           <Route index element={<UserDashboard />} /> 
           <Route path="dashboard" element={<UserDashboard />} />
           <Route path="shopping" element={<ShoppingLayout />}>
-            <Route index element={<Shopping />} /> {/* This is the main shopping page */}
-            <Route path="placeorder" element={<PlaceOrder />} /> {/* This is the place order page */}
+            <Route index element={<Shopping />} />
+            <Route path="placeorder" element={<PlaceOrder />} />
           </Route>
           <Route path="myorders" element={<MyOrders />} />
         </Route>
