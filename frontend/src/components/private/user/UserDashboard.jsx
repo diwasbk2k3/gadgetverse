@@ -5,6 +5,10 @@ function UserDashboard() {
   const [greeting, setGreeting] = useState("");
   const [showPasswordForm, setShowPasswordForm] = useState(false);
   const [userStats, setUserStats] = useState({ totalOrders: 0, totalSpent: 0 });
+  const [currentPassword, setCurrentPassword] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+  const [confirmNewPassword, setConfirmNewPassword] = useState("");
+  const [passwordError, setPasswordError] = useState("");
 
   useEffect(() => {
     const hour = new Date().getHours();
@@ -12,13 +16,37 @@ function UserDashboard() {
     else if (hour < 18) setGreeting("Good afternoon");
     else setGreeting("Good evening");
     const customer_id = localStorage.getItem("customer_id");
-    axios.get(`http://localhost:5000/stats/user/${customer_id}`).then((response) => {setUserStats({
-          totalOrders: response.data.totalOrders,
-          totalSpent: response.data.totalSpent,
-        });
-      })
+    axios.get(`http://localhost:5000/stats/user/${customer_id}`).then((response) => {
+      setUserStats({
+        totalOrders: response.data.totalOrders,
+        totalSpent: response.data.totalSpent,
+      });
+    })
       .catch((error) => console.error("Error fetching user stats:", error));
   }, []);
+
+  const handlePasswordUpdate = () => {
+    if (newPassword !== confirmNewPassword) {
+      setPasswordError("New passwords do not match");
+      return;
+    }
+
+    const customer_id = localStorage.getItem("customer_id");
+
+    axios
+      .put("http://localhost:5000/users/update-password", {
+        customer_id,
+        currentPassword,
+        newPassword,
+      })
+      .then((response) => {
+        alert("Password updated successfully!");
+        setShowPasswordForm(false); // Hide the form after successful update
+      })
+      .catch((error) => {
+        setPasswordError(error.response?.data?.error || "Error updating password");
+      });
+  };
 
   return (
     <div className="p-6 bg-white shadow-lg rounded-lg">
@@ -51,10 +79,34 @@ function UserDashboard() {
       {showPasswordForm && (
         <div className="mt-8 p-4 rounded-lg shadow-md">
           <h2 className="text-lg font-semibold">Change Password</h2>
-          <input type="password" placeholder="Current Password" className="w-full p-2 rounded mt-5" />
-          <input type="password" placeholder="New Password" className="w-full p-2 rounded mt-3" />
-          <input type="password" placeholder="Confirm New Password" className="w-full p-2 rounded mt-3" />
-          <button className="bg-green-500 text-white px-8 py-2 mt-4 rounded hover:cursor-pointer">Submit</button>
+          <input
+            type="password"
+            placeholder="Current Password"
+            className="w-full p-2 rounded mt-5"
+            value={currentPassword}
+            onChange={(e) => setCurrentPassword(e.target.value)}
+          />
+          <input
+            type="password"
+            placeholder="New Password"
+            className="w-full p-2 rounded mt-3"
+            value={newPassword}
+            onChange={(e) => setNewPassword(e.target.value)}
+          />
+          <input
+            type="password"
+            placeholder="Confirm New Password"
+            className="w-full p-2 rounded mt-3"
+            value={confirmNewPassword}
+            onChange={(e) => setConfirmNewPassword(e.target.value)}
+          />
+          {passwordError && <p className="text-red-500 mt-2">{passwordError}</p>}
+          <button
+            className="bg-green-500 text-white px-8 py-2 mt-4 rounded hover:cursor-pointer"
+            onClick={handlePasswordUpdate}
+          >
+            Submit
+          </button>
         </div>
       )}
     </div>
