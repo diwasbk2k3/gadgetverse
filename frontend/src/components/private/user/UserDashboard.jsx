@@ -1,14 +1,23 @@
 import React, { useState, useEffect } from "react";
+import axios from "axios";
 
 function UserDashboard() {
   const [greeting, setGreeting] = useState("");
   const [showPasswordForm, setShowPasswordForm] = useState(false);
+  const [userStats, setUserStats] = useState({ totalOrders: 0, totalSpent: 0 });
 
   useEffect(() => {
     const hour = new Date().getHours();
     if (hour < 12) setGreeting("Good morning");
     else if (hour < 18) setGreeting("Good afternoon");
     else setGreeting("Good evening");
+    const customer_id = localStorage.getItem("customer_id");
+    axios.get(`http://localhost:5000/stats/user/${customer_id}`).then((response) => {setUserStats({
+          totalOrders: response.data.totalOrders,
+          totalSpent: response.data.totalSpent,
+        });
+      })
+      .catch((error) => console.error("Error fetching user stats:", error));
   }, []);
 
   return (
@@ -29,12 +38,12 @@ function UserDashboard() {
         <div className="grid grid-cols-2 gap-4">
           <div className="p-4 bg-blue-500 text-white rounded-lg shadow-md transition-transform duration-300 hover:scale-105">
             <h2 className="text-lg font-semibold">Total Orders</h2>
-            <p className="text-xl font-bold">12</p>
+            <p className="text-xl font-bold">{userStats.totalOrders}</p>
           </div>
 
           <div className="p-4 bg-purple-500 text-white rounded-lg shadow-md transition-transform duration-300 hover:scale-105">
             <h2 className="text-lg font-semibold">Spent Money</h2>
-            <p className="text-xl font-bold">$1,250</p>
+            <p className="text-xl font-bold">${userStats.totalSpent}</p>
           </div>
         </div>
       </div>
