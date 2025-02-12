@@ -33,4 +33,29 @@ router.get('/', async (req, res) => {
   }
 });
 
+// Fetch total orders and total spent money for a specific customer
+router.get('/user/:customer_id', async (req, res) => {
+  try {
+    const { customer_id } = req.params;
+
+    // Get total orders for the customer
+    const userTotalOrders = await Order.count({
+      where: { customer_id },
+    });
+
+    // Get total spent money for the customer
+    const userTotalSpent = await Order.sum('total_price', {
+      where: { customer_id },
+    });
+
+    res.json({
+      totalOrders: userTotalOrders || 0, // Default to 0 if no orders
+      totalSpent: userTotalSpent || 0, // Default to 0 if no spending
+    });
+  } catch (err) {
+    console.error('Error fetching user stats:', err);
+    res.status(500).json({ error: 'Failed to fetch user stats' });
+  }
+});
+
 module.exports = router;
