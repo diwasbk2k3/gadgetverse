@@ -2,6 +2,7 @@ const express = require('express');
 const User = require('../models/userModel');
 const Order = require('../models/orderModel');
 const Product = require('../models/productModel');
+const { fn, col, Op } = require('sequelize');
 
 const router = express.Router();
 
@@ -55,6 +56,39 @@ router.get('/user/:customer_id', async (req, res) => {
   } catch (err) {
     console.error('Error fetching user stats:', err);
     res.status(500).json({ error: 'Failed to fetch user stats' });
+  }
+});
+
+// Get top 5 selling products
+router.get('/top-selling', async (req, res) => {
+  try {
+    // Get top 5 selling product IDs
+    const topProducts = await Order.findAll({
+      attributes: ['product_id', [fn('SUM', col('quantity')), 'total_sold']],
+      group: ['product_id'],
+      order: [[fn('SUM', col('quantity')), 'DESC']],
+      limit: 5,
+      raw: true,
+    });
+
+    const productIds = topProducts.map(item => item.product_id);
+
+    // Get product details
+    const products = await Product.findAll({
+      attributes: ['product_id', 'name', 'image_path'],
+      where: { product_id: { [Op.in]: productIds } },
+      raw: true,
+    });
+
+    // Merge data
+    const result = topProducts.map(order => ({
+      ...order,
+      ...products.find(p => p.product_id === order.product_id),
+    }));
+
+    res.json(result);
+  } catch (err) {
+    res.status(500).json({ error: 'Failed to fetch top-selling products' });
   }
 });
 
