@@ -23,7 +23,7 @@ function Navbar() {
 
         {/* Mobile & Desktop Menu with smooth transition */}
         <ul 
-          className={`absolute md:static top-20 left-0 w-full bg-[#142441] md:flex justify-center text-[20px] transition-all duration-500 ease-in-out transform ${menuOpen ? 'max-h-screen opacity-100' : 'max-h-0 opacity-0 overflow-hidden'} md:max-h-none md:opacity-100`}>
+          className={`absolute md:static top-20 left-0 w-full bg-[#142441] md:flex justify-center text-[16px] transition-all duration-500 ease-in-out transform ${menuOpen ? 'max-h-screen opacity-100' : 'max-h-0 opacity-0 overflow-hidden'} md:max-h-none md:opacity-100`}>
           <li 
             className="mx-4 py-2 md:py-0 cursor-pointer h-10 w-full md:w-[120px] flex items-center justify-center"
             onClick={handleMenuItemClick}>
@@ -59,14 +59,14 @@ function Navbar() {
         </ul>
 
         {/* Desktop Menu (unchanged) */}
-        <div className="hidden md:flex items-center space-x-5 text-[20px]">
+        <div className="hidden md:flex items-center space-x-5 text-[16px]">
           <div className="flex items-center">
             <Link to="/login" className="font-bold mr-2 hover:text-pink-500 hover:cursor-pointer flex items-center">
               <i className="fa-solid fa-user pr-2"></i>
               <span>Login</span>
             </Link>
           </div>
-          <div className="flex items-center px-4 text-[20px]">
+          <div className="flex items-center px-4 text-[16px]">
             <Link to="/signup" className="font-bold mr-2 hover:text-pink-500 hover:cursor-pointer flex items-center">
               <i className="fa-solid fa-user-plus pr-2"></i>
               <span>Signup</span>
