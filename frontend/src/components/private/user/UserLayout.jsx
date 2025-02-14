@@ -5,7 +5,7 @@ import UserNavbar from "./UserNavbar";
 
 function UserLayout() {
 
-  const isUserLoggedIn = localStorage.getItem("customer_id") !== null;
+  const isUserLoggedIn = localStorage.getItem("userToken") !== null;
 
   if (!isUserLoggedIn) {
     return <Navigate to="/login" replace />; // Redirect to login if not logged in

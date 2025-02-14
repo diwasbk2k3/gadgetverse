@@ -18,6 +18,7 @@ function Login() {
       // On successful login, store the user data in localStorage
       localStorage.setItem("customer_id", response.data.customer_id);
       localStorage.setItem("email", response.data.email);
+      localStorage.setItem("userToken", response.data.token); // Store the token
 
       // Alert the user and redirect to the shop page
       alert('Login successful!');

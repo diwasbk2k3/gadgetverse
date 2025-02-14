@@ -7,8 +7,7 @@ function AdminNavbar() {
 
   const handleLogout = () => {
     // Remove admin data from localStorage
-    localStorage.removeItem('adminLoggedIn');
-    localStorage.removeItem('adminEmail');
+    localStorage.removeItem('adminToken');
       navigate('/admin/login');
   };
 

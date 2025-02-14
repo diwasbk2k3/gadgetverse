@@ -12,19 +12,18 @@ function AdminLogin() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.get(`http://localhost:5000/admins/${email}`);
-      const admin = response.data;
+      const response = await axios.post('http://localhost:5000/admins/login', { email, password });
 
-      if (admin.password === password) {
-        localStorage.setItem('adminLoggedIn', 'true');
-        localStorage.setItem('adminEmail', email);
-        navigate('/admin/dashboard');
-      } else {
-        setError('Incorrect password');
-      }
+      // On successful login, store the user data in localStorage
+      localStorage.setItem("adminToken", response.data.token); // Store the token
+
+      // Alert the user and redirect to the shop page
+      alert('Login successful!');
+      navigate('/admin/dashboard');
+
     } catch (err) {
-      console.error('Login Error:', err);
-      setError('Admin not found');
+      // Show alert with the error message if login fails
+      alert(err.response?.data?.error || "Login failed, please try again.");
     }
   };
 

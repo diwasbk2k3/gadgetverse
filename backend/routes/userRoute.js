@@ -1,5 +1,6 @@
 const express = require('express');
 const User = require('../models/userModel');
+const jwtUtil = require('../utils/jwtUtil');
 
 const router = express.Router();
 
@@ -38,10 +39,13 @@ router.post('/login', async (req, res) => {
     const { email, password } = req.body;
     const user = await User.findOne({ where: { email, password } });
     if (user) {
+      // Generate the token after successful login
+      const token = jwtUtil.generateToken(user); // Generate the token	
       res.json({
         message: 'Login successful',
         customer_id: user.customer_id,
         email: user.email,
+        token: token, // Sending the token in the response	
       });
     } else {
       res.status(401).json({ error: 'Invalid email or password' });

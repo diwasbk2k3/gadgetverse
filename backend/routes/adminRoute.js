@@ -1,5 +1,6 @@
 const express = require('express');
 const Admin = require('../models/adminModel');
+const jwtUtil = require('../utils/jwtUtil');
 
 const router = express.Router();
 
@@ -13,17 +14,27 @@ router.get('/', async (req, res) => {
     res.status(500).json({ error: 'Failed to fetch admins' });
   }
 });
-// Get admin by email
-router.get('/:email', async (req, res) => {
-  const { email } = req.params;
+
+// Admin login route
+router.post('/login', async (req, res) => {
   try {
-    const admin = await Admin.findOne({ where: { email } });
-    if (!admin) {
-      return res.status(404).json({ error: 'Admin not found' });
+    const { email, password } = req.body;
+    const admin = await Admin.findOne({ where: { email, password } });
+
+    if (admin) {
+      // Generate the token after successful login
+      const token = jwtUtil.generateToken(admin); // Generate the token for the admin
+
+      res.json({
+        message: 'Admin login successful',
+        email: admin.email,
+        token: token, // Sending the token in the response
+      });
+    } else {
+      res.status(401).json({ error: 'Invalid email or password' });
     }
-    res.json(admin);
   } catch (err) {
-    res.status(500).json({ error: 'Failed to fetch admin' });
+    res.status(500).json({ error: err.message });
   }
 });
 

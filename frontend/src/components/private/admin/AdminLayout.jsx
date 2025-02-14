@@ -4,7 +4,7 @@ import AdminNavbar from './AdminNavbar'
 
 function AdminLayout() {
 
-  const isAdminLoggedIn = localStorage.getItem('adminLoggedIn') === 'true';
+  const isAdminLoggedIn = localStorage.getItem('adminToken') !== null;
 
   if (!isAdminLoggedIn) {
     return <Navigate to="/admin/login"/>; // Redirect to login if not logged in

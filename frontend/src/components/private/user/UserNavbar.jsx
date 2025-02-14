@@ -9,6 +9,7 @@ function UserNavbar() {
   // Remove user data from localStorage
   localStorage.removeItem('customer_id');
   localStorage.removeItem('email');
+  localStorage.removeItem('userToken');
     navigate('/login');
   };
 
