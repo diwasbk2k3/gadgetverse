@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import Location from './Location';
 import Footer from './Footer';
 import axios from "axios";
+import { toast } from 'react-toastify';
 
 function Contact() {
 
@@ -12,28 +13,26 @@ function Contact() {
     message: "",
   });
 
-  const [status, setStatus] = useState("");
-
   // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     // Check if all fields are filled
     if (!formData.name || !formData.email || !formData.contact || !formData.message) {
-      setStatus("Please fill in all fields.");
+      toast.error("Please fill in all fields.");
       return;
     }
 
     try {
       const response = await axios.post("http://localhost:5000/messages", formData);
       if (response.status === 201) {
-        setStatus("Message sent successfully!");
+        toast.success("Message sent successfully!");
         setFormData({ name: "", email: "", contact: "", message: "" });
       } else {
-        setStatus("Failed to send message.");
+        toast.error("Failed to send message.");
       }
     } catch (err) {
-      setStatus("Error sending message.");
+      toast.error("Error sending message.");
     }
   };
 
@@ -109,12 +108,6 @@ function Contact() {
             Send Message
           </button>
         </form>
-        {/* Status Message */}
-        {status && (
-          <div className={`text-center mt-4 ${status === "Message sent successfully!" ? "text-green-500" : "text-red-500"}`}>
-            {status}
-          </div>
-        )}
       </div>
       <Location/>
       <Footer/>

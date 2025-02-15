@@ -1,5 +1,6 @@
 import React from "react";
 import { Link, useNavigate  } from "react-router-dom";
+import { toast } from "react-toastify";
 
 function UserNavbar() {
 
@@ -10,7 +11,8 @@ function UserNavbar() {
   localStorage.removeItem('customer_id');
   localStorage.removeItem('email');
   localStorage.removeItem('userToken');
-    navigate('/login');
+  toast.success("Logout Successfully!")
+  navigate('/login');
   };
 
   return (

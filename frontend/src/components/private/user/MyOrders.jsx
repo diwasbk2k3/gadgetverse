@@ -1,5 +1,6 @@
 import React, { useEffect, useState }  from 'react'
 import axios from "axios";
+import { toast } from 'react-toastify';
 
 function MyOrders() {
 
@@ -18,7 +19,7 @@ function MyOrders() {
         const response = await axios.get(`http://localhost:5000/orders/customer-orders?customer_id=${customer_id}`);
         setOrders(response.data);
       } catch (err) {
-        console.error("Failed to fetch orders:", err);
+        toast.error("Failed to fetch orders:", err);
       }
     };
 

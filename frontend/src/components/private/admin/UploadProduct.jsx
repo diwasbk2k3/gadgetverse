@@ -1,8 +1,12 @@
-
 import React from "react";
 import axios from "axios";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 function UploadProduct() {
+  
+  const navigate = useNavigate();
+
   const handleSubmit = async (e) => {
     e.preventDefault();
   
@@ -20,10 +24,11 @@ function UploadProduct() {
         },
       });
       console.log("Product uploaded:", response.data);
-      alert("Product uploaded successfully!");
+      toast.success("Product uploaded successfully!");
+      navigate("/admin/manage-product"); 
     } catch (err) {
       console.error("Error uploading product:", err);
-      alert("Failed to upload product.");
+      toast.error("Failed to upload product.");
     }
   };
   
@@ -44,6 +49,7 @@ function UploadProduct() {
             type="text"
             id="productName"
             placeholder="Enter product name"
+            required
             className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
         </div>
@@ -60,6 +66,7 @@ function UploadProduct() {
             type="text"
             id="productPrice"
             placeholder="Enter product price"
+            required
             className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
         </div>
@@ -112,6 +119,7 @@ function UploadProduct() {
           <textarea
             id="productDescription"
             placeholder="Enter product description"
+            required
             rows="4"
             className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
           ></textarea>
@@ -120,7 +128,7 @@ function UploadProduct() {
         {/* Submit Button */}
         <button
           type="submit"
-          className="w-full bg-blue-500 text-white font-medium py-2 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="w-full bg-blue-500 text-white font-medium py-2 rounded-lg hover:cursor-pointer hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
         >
           Upload Product
         </button>

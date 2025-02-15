@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 function ShopCard() {
   const [products, setProducts] = useState([]);
@@ -12,7 +13,7 @@ function ShopCard() {
         const response = await axios.get("http://localhost:5000/products");
         setProducts(response.data);
       } catch (err) {
-        console.error("Failed to fetch products:", err);
+        toast.error("Failed to fetch products:", err);
       }
     };
 

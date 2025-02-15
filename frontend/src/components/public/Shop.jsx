@@ -20,25 +20,6 @@ function Shop() {
 
     <div className="flex flex-wrap md:gap-0 md:px-0 px-4 gap-2">
       <ShopCard/>
-      <ShopCard/>
-      <ShopCard/>
-      <ShopCard/>
-      <ShopCard/>
-      <ShopCard/>
-      <ShopCard/>
-      <ShopCard/>
-      <ShopCard/>
-      <ShopCard/>
-      <ShopCard/>
-      <ShopCard/>
-      <ShopCard/>
-      <ShopCard/>
-      <ShopCard/>
-      <ShopCard/>
-      <ShopCard/>
-      <ShopCard/>
-      <ShopCard/>
-      <ShopCard/>
     </div>
     
     <div className="bg-gradient-to-r from-blue-400 via-red-300 to-blue-400 mt-8">

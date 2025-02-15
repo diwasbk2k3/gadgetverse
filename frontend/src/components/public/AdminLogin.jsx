@@ -2,15 +2,19 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Footer from './Footer';
+import { toast } from "react-toastify";
 
 function AdminLogin() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!email || !password) {
+      toast.error("All fields are required.");
+      return;
+    }
     try {
       const response = await axios.post('http://localhost:5000/admins/login', { email, password });
 
@@ -18,12 +22,12 @@ function AdminLogin() {
       localStorage.setItem("adminToken", response.data.token); // Store the token
 
       // Alert the user and redirect to the shop page
-      alert('Login successful!');
+      toast.success('Login successful!');
       navigate('/admin/dashboard');
 
     } catch (err) {
       // Show alert with the error message if login fails
-      alert(err.response?.data?.error || "Login failed, please try again.");
+      toast.error(err.response?.data?.error || "Login failed, please try again.");
     }
   };
 
@@ -45,7 +49,6 @@ function AdminLogin() {
           <form className="m-2 md:m-5" onSubmit={handleSubmit}>
             <h2 className="text-3xl font-bold text-gray-800 text-center mt-6 md:mt-12">Welcome Back!</h2>
             <p className="text-gray-600 text-center mb-6 md:mb-12">Manage your platform with ease</p>
-            {error && <p className="text-red-600 text-center mb-4">{error}</p>}
             <div className="mb-4 md:mb-6">
               <label htmlFor="email" className="block text-gray-700 font-semibold mb-2">Email Address</label>
               <input
@@ -70,7 +73,7 @@ function AdminLogin() {
             </div>
             <button
               type="submit"
-              className="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 transition-colors"
+              className="w-full bg-blue-500 text-white py-2 rounded-lg hover:cursor-pointer hover:bg-blue-600 transition-colors"
             >
               Log In
             </button>

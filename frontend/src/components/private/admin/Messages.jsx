@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import axios from "axios";
+import { toast } from 'react-toastify';
 
 export default function Messages() {
   const [messages, setMessages] = useState([]);
@@ -12,6 +13,7 @@ export default function Messages() {
         setMessages(response.data);
       } catch (err) {
         console.error("Error fetching messages:", err);
+        toast.error("Error fetching messages:");
       }
     };
 

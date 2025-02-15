@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import axios from "axios";
+import { toast } from 'react-toastify';
 
 function Users() {
 
@@ -13,6 +14,7 @@ function Users() {
         setUsers(response.data);
       } catch (err) {
         console.error("Failed to fetch users:", err);
+        toast.error("Failed to fetch users:");
       }
     };
 
@@ -23,11 +25,11 @@ function Users() {
   const handleRemove = async (customerId) => {
     try {
       await axios.delete(`http://localhost:5000/users/${customerId}`);
-      alert("User Removed successfully!");
+      toast.success("User Removed successfully!");
       setUsers(users.filter((user) => user.customer_id !== customerId)); // Remove user from UI
     } catch (err) {
       console.error("Failed to Remove user:", err);
-      alert("Failed to Remove user.");
+      toast.error("Failed to Remove user.");
     }
   };
 

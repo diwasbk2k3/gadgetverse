@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 function UserDashboard() {
   const [greeting, setGreeting] = useState("");
@@ -8,7 +9,6 @@ function UserDashboard() {
   const [currentPassword, setCurrentPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmNewPassword, setConfirmNewPassword] = useState("");
-  const [passwordError, setPasswordError] = useState("");
 
   useEffect(() => {
     const hour = new Date().getHours();
@@ -26,13 +26,15 @@ function UserDashboard() {
   }, []);
 
   const handlePasswordUpdate = () => {
+    if (!currentPassword || !newPassword || !confirmNewPassword) {
+          toast.error("All fields are required.");
+          return;
+    }
     if (newPassword !== confirmNewPassword) {
-      setPasswordError("New passwords do not match");
+      toast.error("New passwords do not match");
       return;
     }
-
     const customer_id = localStorage.getItem("customer_id");
-
     axios
       .put("http://localhost:5000/users/update-password", {
         customer_id,
@@ -40,11 +42,11 @@ function UserDashboard() {
         newPassword,
       })
       .then((response) => {
-        alert("Password updated successfully!");
+        toast.success("Password updated successfully!");
         setShowPasswordForm(false); // Hide the form after successful update
       })
       .catch((error) => {
-        setPasswordError(error.response?.data?.error || "Error updating password");
+        toast.error(error.response?.data?.error || "Error updating password");
       });
   };
 
@@ -56,7 +58,7 @@ function UserDashboard() {
       {/* Dashboard Section*/}
       <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-6">
         <div
-          className="p-4 bg-green-500 text-white rounded-lg shadow-md transition-transform duration-300 hover:scale-105 cursor-pointer"
+          className="p-4 bg-green-500 text-white rounded-lg shadoRw-md transition-transform duration-300 hover:scale-105 cursor-pointer"
           onClick={() => setShowPasswordForm(true)}
         >
           <h2 className="text-lg font-semibold">Profile</h2>
@@ -100,7 +102,6 @@ function UserDashboard() {
             value={confirmNewPassword}
             onChange={(e) => setConfirmNewPassword(e.target.value)}
           />
-          {passwordError && <p className="text-red-500 mt-2">{passwordError}</p>}
           <button
             className="bg-green-500 text-white px-8 py-2 mt-4 rounded hover:cursor-pointer"
             onClick={handlePasswordUpdate}

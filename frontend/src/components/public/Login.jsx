@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import Footer from './Footer';
+import { toast } from "react-toastify";
 
 function Login() {
 
@@ -11,7 +12,10 @@ function Login() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    if (!email || !password) {
+          toast.error("All fields are required.");
+          return;
+        }
     try {
       const response = await axios.post("http://localhost:5000/users/login", {email,password,});
 
@@ -21,12 +25,12 @@ function Login() {
       localStorage.setItem("userToken", response.data.token); // Store the token
 
       // Alert the user and redirect to the shop page
-      alert('Login successful!');
+      toast.success('Login successful!');
       navigate("/user/dashboard");
 
     } catch (err) {
       // Show alert with the error message if login fails
-      alert(err.response?.data?.error || "Login failed, please try again.");
+      toast.error(err.response?.data?.error || "Login failed, please try again.");
     }
   };
 
@@ -98,7 +102,7 @@ function Login() {
             </div>
             <button
               type="submit"
-              className="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 transition-colors"
+              className="w-full bg-blue-500 text-white py-2 rounded-lg hover:cursor-pointer hover:bg-blue-600 transition-colors"
             >
               Log In
             </button>

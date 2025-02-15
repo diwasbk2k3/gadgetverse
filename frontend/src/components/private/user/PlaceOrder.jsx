@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { toast } from 'react-toastify';
 
 function PlaceOrder() {
 
@@ -10,7 +11,6 @@ function PlaceOrder() {
   const [quantity, setQuantity] = useState(1);
   const [phone, setPhone] = useState("");
   const [locationInput, setLocationInput] = useState("");
-  const [error, setError] = useState("");
   const [customerId, setCustomerId] = useState(null); // Store customer_id
   const [email, setEmail] = useState(null);          // Store email
 
@@ -32,13 +32,7 @@ function PlaceOrder() {
     e.preventDefault();
 
     if (!quantity || !phone || !locationInput) {
-      setError("All fields are required.");
-      return;
-    }
-
-    // Check if customer_id and email are available
-    if (!customerId || !email) {
-      setError("You must be logged in to place an order.");
+      toast.error("All fields are required.");
       return;
     }
 
@@ -57,7 +51,7 @@ function PlaceOrder() {
       const response = await axios.post("http://localhost:5000/orders", orderData);
 
       if (response.status === 201) {
-        alert("Order placed successfully!");
+        toast.success("Order placed successfully!");
         navigate("/user/myorders");
       } else {
         setError(response.data.error || "Failed to place order. Please try again.");

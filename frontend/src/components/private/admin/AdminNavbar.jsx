@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link, useNavigate  } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 function AdminNavbar() {
 
@@ -8,7 +9,8 @@ function AdminNavbar() {
   const handleLogout = () => {
     // Remove admin data from localStorage
     localStorage.removeItem('adminToken');
-      navigate('/admin/login');
+    toast.success("Logout Successfully!")
+    navigate('/admin/login');
   };
 
   return (

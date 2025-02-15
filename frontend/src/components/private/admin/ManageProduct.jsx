@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import EditForm from "./EditForm"; 
+import { toast } from "react-toastify";
 
 function ManageProduct() {
   const [products, setProducts] = useState([]);
@@ -14,6 +15,7 @@ function ManageProduct() {
         setProducts(response.data);
       } catch (err) {
         console.error("Failed to fetch products:", err);
+        toast.error("Failed to fetch products:");
       }
     };
 
@@ -24,11 +26,11 @@ function ManageProduct() {
   const handleDelete = async (productId) => {
     try {
       await axios.delete(`http://localhost:5000/products/${productId}`);
-      alert("Product deleted successfully!");
+      toast.success("Product deleted successfully!");
       setProducts(products.filter((product) => product.product_id !== productId));
     } catch (err) {
       console.error("Failed to delete product:", err);
-      alert("Failed to delete product.");
+      toast.error("Failed to delete product.");
     }
   };
 
@@ -54,7 +56,7 @@ function ManageProduct() {
           },
         }
       );
-      alert("Product updated successfully!");
+      toast.success("Product updated successfully!");
       setProducts((prevProducts) =>
         prevProducts.map((product) =>
           product.product_id === editProduct.product_id
@@ -65,7 +67,7 @@ function ManageProduct() {
       setEditProduct(null); // Close the edit form
     } catch (err) {
       console.error("Failed to update product:", err);
-      alert("Failed to update product.");
+      toast.error("Failed to update product.");
     }
   };
   

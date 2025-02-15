@@ -2,9 +2,10 @@ import React, { useState } from 'react'
 import { Link, useNavigate } from "react-router-dom";
 import axios from 'axios';
 import Footer from './Footer';
+import { toast } from "react-toastify";
 
 function Signup() {
-
+  
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -13,16 +14,21 @@ function Signup() {
   // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!email || !password||! confirmPassword) {
+          toast.error("All fields are required.");
+          return;
+        }
 
     if (password !== confirmPassword) {
-      alert("Passwords do not match");
+      toast.error("Passwords do not match");
     } else {
       try {
         const response = await axios.post("http://localhost:5000/users/signup", { email, password });
         console.log(response.data);  // Handle success, maybe redirect user to login page
+        toast.success("Signup Successful!");
         navigate("/login"); // Redirect to /login page after successful signup
       } catch (error) {
-        alert(error.response ? error.response.data.error : "An error occurred");
+        toast.error(error.response ? error.response.data.error : "An error occurred");
       }
     }
   };
@@ -111,7 +117,7 @@ function Signup() {
             </div>
             <button
               type="submit"
-              className="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 transition-colors"
+              className="w-full bg-blue-500 text-white py-2 rounded-lg hover:cursor-pointer hover:bg-blue-600 transition-colors"
             >
               Sign Up
             </button>

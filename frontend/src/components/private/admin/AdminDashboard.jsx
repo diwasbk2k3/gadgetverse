@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 export default function Dashboard() {
   const [greeting, setGreeting] = useState("");
@@ -28,7 +29,7 @@ export default function Dashboard() {
         const response = await axios.get("http://localhost:5000/stats");
         setStats(response.data);
       } catch (error) {
-        console.error("Error fetching stats:", error);
+        toast.error("Error fetching stats:", error);
       }
     }
     
