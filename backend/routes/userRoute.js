@@ -1,6 +1,7 @@
 const express = require('express');
 const User = require('../models/userModel');
 const jwtUtil = require('../utils/jwtUtil');
+const bcrypt = require('bcrypt');
 
 const router = express.Router();
 
@@ -26,7 +27,9 @@ router.post('/signup', async (req, res) => {
   try {
     const { email, password } = req.body;
     const customer_id = generateCustomerId();
-    const newUser = await User.create({ customer_id, email, password });
+    // Hash the password before saving
+    const hashedPassword = await bcrypt.hash(password, 10);
+    const newUser = await User.create({ customer_id, email, password: hashedPassword });
     res.json({ message: 'User created successfully', user: newUser });
   } catch (err) {
     res.status(500).json({ error: err.message });
