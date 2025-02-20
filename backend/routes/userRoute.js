@@ -83,12 +83,15 @@ router.put('/update-password', async (req, res) => {
     if (!user) {
       return res.status(404).json({ error: 'User not found' });
     }
-    // Check if current password matches
-    if (user.password !== currentPassword) {
+    // Compare the current password with the stored hashed password
+    const passwordMatch = await bcrypt.compare(currentPassword, user.password);
+    if (!passwordMatch) {
       return res.status(401).json({ error: 'Current password is incorrect' });
     }
-    // Update the password
-    user.password = newPassword;
+
+    // Hash the new password before storing it
+    const hashedPassword = await bcrypt.hash(newPassword, 10);
+    user.password = hashedPassword;
     await user.save();
     res.json({ message: 'Password updated successfully' });
   } catch (err) {
