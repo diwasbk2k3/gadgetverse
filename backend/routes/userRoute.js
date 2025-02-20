@@ -40,8 +40,8 @@ router.post('/signup', async (req, res) => {
 router.post('/login', async (req, res) => {
   try {
     const { email, password } = req.body;
-    const user = await User.findOne({ where: { email, password } });
-    if (user) {
+    const user = await User.findOne({ where: { email } });
+    if (user&& (await bcrypt.compare(password, user.password))) {
       // Generate the token after successful login
       const token = jwtUtil.generateToken(user); // Generate the token	
       res.json({
