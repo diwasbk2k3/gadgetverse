@@ -103,7 +103,7 @@ function HeroSection() {
         <motion.img
           src="gadgetverse_img.png"
           alt="Gadget Collection"
-          className="md:h-[600px]"
+          className="md:h-[300px] h-[175px]"
           animate={{ y: [0, -10, 0] }}
           transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
         />

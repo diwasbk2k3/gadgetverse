@@ -11,7 +11,7 @@ function BestSellingGadgets() {
       try {
         const response = await axios.get("http://localhost:5000/stats/top-selling");
         console.log("API Response:", response.data);
-        setTopSellingProducts(response.data.slice(0, 7)); // Ensure only top 5 products
+        setTopSellingProducts(response.data.slice(0, 5)); // Ensure only top 5 products
       } catch (error) {
         console.error("Failed to fetch top-selling products:", error);
       }
@@ -31,7 +31,7 @@ function BestSellingGadgets() {
         <div className="bg-gradient-to-r via-white w-[300px] sm:w-[550px] h-[10px] flex justify-center items-center rounded-lg mt-5"></div>
       </div>
 
-      <div className="bg-gray-50 flex flex-wrap justify-center gap-10 px-4 py-8">
+      <div className="bg-gray-50 flex flex-wrap justify-center gap-6 px-4 py-8">
         {topSellingProducts.length > 0 ? (
           topSellingProducts.map((product) => (
             <div

@@ -83,7 +83,7 @@ function ManageProduct() {
           handleSave={handleSave} // Pass save handler
         />
       )}
-
+      <div className="overflow-x-auto">
       <table className="w-full border-collapse border border-gray-300 mt-6">
         <thead className="bg-gray-200">
           <tr>
@@ -128,6 +128,7 @@ function ManageProduct() {
           )}
         </tbody>
       </table>
+      </div>
     </div>
   );
 }
